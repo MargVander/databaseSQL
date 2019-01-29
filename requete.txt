@@ -1,0 +1,41 @@
+Récupérer tous les albums : 
+SELECT * FROM albums
+
+Récupérer tous les albums dont le titre contient « Great » : 
+SELECT * FROM albums
+WHERE Title LIKE ‘%Great%’;
+
+Nb albums dans la base :
+SELECT COUNT(AlbumID)
+FROM albums;
+
+Supprimer albums qui contiennent « Music » :
+DELETE FROM albums
+WHERE Title LIKE ‘%music%’;
+
+Récupérer albums écrits par AC/DC :
+SELECT * FROM albums
+JOIN artist ON artists.ArtistId = albums.ArtistId
+WHERE artists.Name = ‘AC/DC’;
+
+Récupérer titres albums écrits par AC/DC
+SELECT * FROM albums
+JOIN tracks ON tracks.AlbumId = albums.AlbumId
+JOIN artists ON artists.ArtistId = albums.ArtistId
+WHERE artists.Name = 'AC/DC';
+
+Récupérer la liste des titres de l’album Let There Be Rock
+SELECT * FROM tracks
+JOIN albums ON albums.AlbumId = tracks.AlbumId
+WHERE albums.Title = ‘Let There Be Rock’;
+
+Afficher prix et durée de cette album
+SELECT SUM(UnitPrice), SUM(Milliseconds)
+FROM tracks
+WHERE AlbumID = 4;
+
+Afficher le coût de l’intégralité de la discographie de ‘Deep Purple’
+SELECT SUM(UnitPrice) FROM albums
+JOIN tracks ON tracks.AlbumId = albums.AlbumId
+ JOIN artists ON artists.ArtistId = albums.ArtistId
+ WHERE artists.Name = 'Deep Purple';
